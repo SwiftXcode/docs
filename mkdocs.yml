@@ -15,4 +15,6 @@ extra_css:   [ extra.css ]
 pages:
   - 'Introduction':            'index.md'
   - 'Installation':            'install.md'
+  - 'Usage':                   'usage.md'
+  - 'Images':                  'images.md'
   - 'About':                   'about.md'
