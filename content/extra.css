@@ -1,0 +1,19 @@
+.section p {
+  font-size: 18px;
+}
+.section pre code {
+  font-size: 18px;
+}
+.wy-side-nav-search, .wy-nav-top {
+  background-color: #326790;
+}
+.wy-breadcrumbs a {
+  color: #326790;
+}
+.wy-breadcrumbs-aside {
+  display: block !important;
+}
+.wy-breadcrumbs-aside img {
+  width:  72px;
+  height: 72px;
+}
