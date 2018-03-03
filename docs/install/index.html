@@ -72,12 +72,24 @@
     
         <ul>
         
+            <li><a class="toctree-l3" href="#extra-images">Extra Images</a></li>
+        
             <li><a class="toctree-l3" href="#troubleshooting">Troubleshooting</a></li>
         
         </ul>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../usage/">Usage</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../images/">Images</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -111,7 +123,7 @@
     
     <li class="wy-breadcrumbs-aside">
       <a href="https://SwiftXcode.github.io/">
-        <img src="TODO" />
+        <img src="http://zeezide.com/img/SwiftXcodePkgIcon.svg" />
       </a>
     </li>
   </ul>
@@ -121,7 +133,26 @@
             <div class="section">
               
                 <h1 id="swiftxcode-installation">SwiftXcode Installation</h1>
-<p>TODO</p>
+<pre><code class="shell">brew tap swiftxcode/swiftxcode
+brew install swift-xcode
+swift xcode link-templates # &lt;-- important!
+</code></pre>
+
+<h3 id="extra-images">Extra Images</h3>
+<p>Images are pairs of Xcode templates and precompiled Swift packages 
+(used by those templates).
+The precompilation happens when you install a Homebrew image formula
+(or manually using the GIT repo) and can take some time.
+Afterwards you can create new Xcode projects using those templates,
+without having to wait for the SPM bootstrap (fetch and compilation
+of the dependencies).</p>
+<h4 id="image-kitura">Image: Kitura</h4>
+<p>(One time) compile time: ~5 minutes. Image size: ~100MB.
+Fresh project setup from create to run: 3 seconds.</p>
+<pre><code class="shell">brew install swift-xcode-kitura
+swift xcode link-templates # &lt;-- important!
+</code></pre>
+
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>If something isn't working in a Homebrew setup, check whether:</p>
 <pre><code>brew doctor
@@ -137,7 +168,7 @@ or our
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -162,7 +193,7 @@ or our
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../about/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

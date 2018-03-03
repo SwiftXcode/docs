@@ -12,18 +12,58 @@
         }, 
         {
             "location": "/install/", 
-            "text": "SwiftXcode Installation\n\n\nTODO\n\n\nTroubleshooting\n\n\nIf something isn't working in a Homebrew setup, check whether:\n\n\nbrew doctor\n\n\n\noutputs anything unusual.\n\n\nIf you need any help, feel free to ask on the\n\nMailing List\n\nor our\n\nSlack channel\n.", 
+            "text": "SwiftXcode Installation\n\n\nbrew tap swiftxcode/swiftxcode\nbrew install swift-xcode\nswift xcode link-templates # \n-- important!\n\n\n\n\nExtra Images\n\n\nImages are pairs of Xcode templates and precompiled Swift packages \n(used by those templates).\nThe precompilation happens when you install a Homebrew image formula\n(or manually using the GIT repo) and can take some time.\nAfterwards you can create new Xcode projects using those templates,\nwithout having to wait for the SPM bootstrap (fetch and compilation\nof the dependencies).\n\n\nImage: Kitura\n\n\n(One time) compile time: ~5 minutes. Image size: ~100MB.\nFresh project setup from create to run: 3 seconds.\n\n\nbrew install swift-xcode-kitura\nswift xcode link-templates # \n-- important!\n\n\n\n\nTroubleshooting\n\n\nIf something isn't working in a Homebrew setup, check whether:\n\n\nbrew doctor\n\n\n\noutputs anything unusual.\n\n\nIf you need any help, feel free to ask on the\n\nMailing List\n\nor our\n\nSlack channel\n.", 
             "title": "Installation"
         }, 
         {
             "location": "/install/#swiftxcode-installation", 
-            "text": "TODO", 
+            "text": "brew tap swiftxcode/swiftxcode\nbrew install swift-xcode\nswift xcode link-templates #  -- important!", 
             "title": "SwiftXcode Installation"
+        }, 
+        {
+            "location": "/install/#extra-images", 
+            "text": "Images are pairs of Xcode templates and precompiled Swift packages \n(used by those templates).\nThe precompilation happens when you install a Homebrew image formula\n(or manually using the GIT repo) and can take some time.\nAfterwards you can create new Xcode projects using those templates,\nwithout having to wait for the SPM bootstrap (fetch and compilation\nof the dependencies).", 
+            "title": "Extra Images"
+        }, 
+        {
+            "location": "/install/#image-kitura", 
+            "text": "(One time) compile time: ~5 minutes. Image size: ~100MB.\nFresh project setup from create to run: 3 seconds.  brew install swift-xcode-kitura\nswift xcode link-templates #  -- important!", 
+            "title": "Image: Kitura"
         }, 
         {
             "location": "/install/#troubleshooting", 
             "text": "If something isn't working in a Homebrew setup, check whether:  brew doctor  outputs anything unusual.  If you need any help, feel free to ask on the Mailing List \nor our Slack channel .", 
             "title": "Troubleshooting"
+        }, 
+        {
+            "location": "/usage/", 
+            "text": "Usage\n\n\nUsing it for iOS Projects\n\n\nHere is the basic version:\n\n\n\n\nCreate new Project in Xcode (File Menu / New / Project)\n\n\nSelect iOS / Swift Package Manager App\n\n\nGive it a name, optionally preconfigure SPM modules you want\n\n\nBuild project (can take a moment w/o an image)\n\n\nIn Package.swift, add modules as you wish, e.g. \ncows\n\n\nin AppDelegate.swift, \nimport cows\n, do \nprint(cows.vaca())\n\n\nBuild project and run\n\n\n\n\nManual Setup\n\n\nThe functionality can be added to any existing project,\nthere is no requirement to use the templates.\n\n\nSteps:\n- Create a \nPackage.swift\n in your project,\n  DO NOT ADD it to the Xcode target\n- Add an Xcode shell buildstep to your target, put it at the very top.\n  Within that, invoke \nswift xcode build\n\n  (optionally prefixed by an \nSPM_IMAGE=ImageYouWantToUse\n)\n- Add some build settings (either in Xcode or in an xcconfig file):\n  - \"Header Search Paths\" / \nHEADER_SEARCH_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Import Paths\" (Swift) / \nSWIFT_INCLUDE_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Library Search Paths\" / \nLIBRARY_SEARCH_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Other Linker Flags\" / \nOTHER_LDFLAGS\n\n    - \n-lXcodeSPMDependencies\n\n\nIf you do this a lot and you don't want to use the templates,\ncreate an \nxcconfig\n file to carry the settings,\nand just add that to your project.\nWe also provide an xcconfig you can use/include:\n\n/usr/local/lib/xcconfig/swift-xcode.xcconfig\n.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/usage/#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/usage/#using-it-for-ios-projects", 
+            "text": "Here is the basic version:   Create new Project in Xcode (File Menu / New / Project)  Select iOS / Swift Package Manager App  Give it a name, optionally preconfigure SPM modules you want  Build project (can take a moment w/o an image)  In Package.swift, add modules as you wish, e.g.  cows  in AppDelegate.swift,  import cows , do  print(cows.vaca())  Build project and run", 
+            "title": "Using it for iOS Projects"
+        }, 
+        {
+            "location": "/usage/#manual-setup", 
+            "text": "The functionality can be added to any existing project,\nthere is no requirement to use the templates.  Steps:\n- Create a  Package.swift  in your project,\n  DO NOT ADD it to the Xcode target\n- Add an Xcode shell buildstep to your target, put it at the very top.\n  Within that, invoke  swift xcode build \n  (optionally prefixed by an  SPM_IMAGE=ImageYouWantToUse )\n- Add some build settings (either in Xcode or in an xcconfig file):\n  - \"Header Search Paths\" /  HEADER_SEARCH_PATHS \n    -  $(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION) \n  - \"Import Paths\" (Swift) /  SWIFT_INCLUDE_PATHS \n    -  $(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION) \n  - \"Library Search Paths\" /  LIBRARY_SEARCH_PATHS \n    -  $(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION) \n  - \"Other Linker Flags\" /  OTHER_LDFLAGS \n    -  -lXcodeSPMDependencies  If you do this a lot and you don't want to use the templates,\ncreate an  xcconfig  file to carry the settings,\nand just add that to your project.\nWe also provide an xcconfig you can use/include: /usr/local/lib/xcconfig/swift-xcode.xcconfig .", 
+            "title": "Manual Setup"
+        }, 
+        {
+            "location": "/images/", 
+            "text": "img", 
+            "title": "Images"
+        }, 
+        {
+            "location": "/images/#img", 
+            "text": "", 
+            "title": "img"
         }, 
         {
             "location": "/about/", 

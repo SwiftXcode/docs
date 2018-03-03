@@ -8,7 +8,7 @@
   
   <meta name="author" content="ZeeZide GmbH">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>About - SwiftXcode</title>
+  <title>Usage - SwiftXcode</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "About";
-    var mkdocs_page_input_path = "about.md";
-    var mkdocs_page_url = "/about/";
+    var mkdocs_page_name = "Usage";
+    var mkdocs_page_input_path = "usage.md";
+    var mkdocs_page_url = "/usage/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -68,9 +68,23 @@
     <a class="" href="../install/">Installation</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../usage/">Usage</a>
+    <a class="current" href="./">Usage</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#usage">Usage</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#using-it-for-ios-projects">Using it for iOS Projects</a></li>
+        
+            <li><a class="toctree-l3" href="#manual-setup">Manual Setup</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -78,21 +92,9 @@
     <a class="" href="../images/">Images</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">About</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#contact">Contact</a></li>
-    
-
-    <li class="toctree-l2"><a href="#mkdocs">Mkdocs</a></li>
-    
-
-    <li class="toctree-l2"><a href="#who">Who</a></li>
-    
-
-    </ul>
+    <a class="" href="../about/">About</a>
 	    </li>
           
         </ul>
@@ -117,7 +119,7 @@
     
       
     
-    <li>About</li>
+    <li>Usage</li>
     
     <li class="wy-breadcrumbs-aside">
       <a href="https://SwiftXcode.github.io/">
@@ -130,30 +132,51 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="contact">Contact</h3>
-<p>Hey, we love feedback. Join the mailing list, Slack channel or just drop us
-an email to tell us why this is crap (or not?).</p>
-<ul>
-<li><a href="https://groups.google.com/d/forum/apacheexpress">Mailing List</a></li>
-<li><a href="http://slack.noze.io">Slack</a></li>
-<li><a href="../info@apacheexpress.io">info@apacheexpress.io</a></li>
-</ul>
-<h3 id="mkdocs">Mkdocs</h3>
-<p>Built with <a href="http://www.mkdocs.org">MkDocs</a> 
-using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> 
-provided by <a href="https://readthedocs.org">Read the Docs</a>.</p>
-<h3 id="who">Who</h3>
-<p>SwiftXcode is brought to you by the
-<a href="http://zeezide.de">ZeeZide</a> GmbH.
-<a href="http://zeezide.com/contact.html">Imprint</a>.</p>
+                <h1 id="usage">Usage</h1>
+<h2 id="using-it-for-ios-projects">Using it for iOS Projects</h2>
+<p>Here is the basic version:</p>
+<ol>
+<li>Create new Project in Xcode (File Menu / New / Project)</li>
+<li>Select iOS / Swift Package Manager App</li>
+<li>Give it a name, optionally preconfigure SPM modules you want</li>
+<li>Build project (can take a moment w/o an image)</li>
+<li>In Package.swift, add modules as you wish, e.g. <code>cows</code></li>
+<li>in AppDelegate.swift, <code>import cows</code>, do <code>print(cows.vaca())</code></li>
+<li>Build project and run</li>
+</ol>
+<h2 id="manual-setup">Manual Setup</h2>
+<p>The functionality can be added to any existing project,
+there is no requirement to use the templates.</p>
+<p>Steps:
+- Create a <code>Package.swift</code> in your project,
+  DO NOT ADD it to the Xcode target
+- Add an Xcode shell buildstep to your target, put it at the very top.
+  Within that, invoke <code>swift xcode build</code>
+  (optionally prefixed by an <code>SPM_IMAGE=ImageYouWantToUse</code>)
+- Add some build settings (either in Xcode or in an xcconfig file):
+  - "Header Search Paths" / <code>HEADER_SEARCH_PATHS</code>
+    - <code>$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)</code>
+  - "Import Paths" (Swift) / <code>SWIFT_INCLUDE_PATHS</code>
+    - <code>$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)</code>
+  - "Library Search Paths" / <code>LIBRARY_SEARCH_PATHS</code>
+    - <code>$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)</code>
+  - "Other Linker Flags" / <code>OTHER_LDFLAGS</code>
+    - <code>-lXcodeSPMDependencies</code></p>
+<p>If you do this a lot and you don't want to use the templates,
+create an <code>xcconfig</code> file to carry the settings,
+and just add that to your project.
+We also provide an xcconfig you can use/include:
+<code>/usr/local/lib/xcconfig/swift-xcode.xcconfig</code>.</p>
               
             </div>
           </div>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../images/" class="btn btn-neutral float-right" title="Images">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../images/" class="btn btn-neutral" title="Images"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../install/" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -172,8 +195,10 @@ provided by <a href="https://readthedocs.org">Read the Docs</a>.</p>
           <a href="https://github.com/SwiftXcode/swift-xcode/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../images/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../install/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../images/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
