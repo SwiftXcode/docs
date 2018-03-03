@@ -17,4 +17,5 @@ pages:
   - 'Installation':            'install.md'
   - 'Usage':                   'usage.md'
   - 'Images':                  'images.md'
+  - 'Goals':                   'goals.md'
   - 'About':                   'about.md'

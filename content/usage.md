@@ -12,7 +12,19 @@ Here is the basic version:
 6. in AppDelegate.swift, `import cows`, do `print(cows.vaca())`
 7. Build project and run
 
-## Manual Setup
+
+## Using it for macOS Projects
+
+A macOS command line template is included, but you can also create a Cocoa
+app using the manual setup (to be fixed ...).
+
+
+## Using it for Server Side Swift
+
+We provide a set of images for Kitura etc.
+
+
+## Manual Setup for any Project
 
 The functionality can be added to any existing project,
 there is no requirement to use the templates.

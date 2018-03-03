@@ -78,10 +78,23 @@
     <a class="current" href="./">Images</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#img">img</a></li>
+    <li class="toctree-l2"><a href="#swiftxcode-images">SwiftXcode Images</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#new-xcode-releases">New Xcode Releases</a></li>
+        
+            <li><a class="toctree-l3" href="#creating-new-images">Creating New Images</a></li>
+        
+        </ul>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../goals/">Goals</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -124,14 +137,34 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="img">img</h1>
+                <h1 id="swiftxcode-images">SwiftXcode Images</h1>
+<p>Images are pairs of Xcode templates and precompiled Swift packages 
+(used by those templates).
+The precompilation happens when you install a Homebrew image formula
+(or manually using the GIT repo) and can take some time.
+Afterwards you can create new Xcode projects using those templates,
+without having to wait for the SPM bootstrap (fetch and compilation
+of the dependencies).</p>
+<p><strong>Important:</strong> After installing (or uninstalling) an image, make sure to call:</p>
+<pre><code class="shell">swift xcode link-templates # &lt;-- important!
+</code></pre>
+
+<p>This makes the image's Xcode templates available to Xcode.</p>
+<h2 id="new-xcode-releases">New Xcode Releases</h2>
+<p>If a new Xcode is released (/a new Swift version),
+make sure to rebuild your images 
+(e.g. using <code>brew reinstall swift-xcode-kitura</code>).</p>
+<p>Everything will work w/o this, but you loose the convenience of having
+precompiled packages at setup time.</p>
+<h2 id="creating-new-images">Creating New Images</h2>
+<p>TODO</p>
               
             </div>
           </div>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../goals/" class="btn btn-neutral float-right" title="Goals">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../usage/" class="btn btn-neutral" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -156,7 +189,7 @@
         <span><a href="../usage/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../about/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../goals/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

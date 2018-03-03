@@ -8,7 +8,7 @@
   
   <meta name="author" content="ZeeZide GmbH">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>About - SwiftXcode</title>
+  <title>Goals - SwiftXcode</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "About";
-    var mkdocs_page_input_path = "about.md";
-    var mkdocs_page_url = "/about/";
+    var mkdocs_page_name = "Goals";
+    var mkdocs_page_input_path = "goals.md";
+    var mkdocs_page_url = "/goals/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -78,26 +78,30 @@
     <a class="" href="../images/">Images</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../goals/">Goals</a>
-	    </li>
-          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">About</a>
+    <a class="current" href="./">Goals</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#contact">Contact</a></li>
+    <li class="toctree-l2"><a href="#swiftxcode-goals">SwiftXcode Goals</a></li>
     
-
-    <li class="toctree-l2"><a href="#mkdocs">Mkdocs</a></li>
-    
-
-    <li class="toctree-l2"><a href="#who">Who</a></li>
+        <ul>
+        
+            <li><a class="toctree-l3" href="#1-use-swift-package-manager-directly-from-within-xcode">1. Use Swift Package Manager directly from within Xcode</a></li>
+        
+            <li><a class="toctree-l3" href="#2-reduce-compile-time">2. Reduce Compile Time</a></li>
+        
+            <li><a class="toctree-l3" href="#3-reduce-initial-compile-time">3. Reduce Initial Compile Time</a></li>
+        
+        </ul>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
 	    </li>
           
         </ul>
@@ -122,7 +126,7 @@
     
       
     
-    <li>About</li>
+    <li>Goals</li>
     
     <li class="wy-breadcrumbs-aside">
       <a href="https://SwiftXcode.github.io/">
@@ -135,30 +139,56 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="contact">Contact</h3>
-<p>Hey, we love feedback. Join the mailing list, Slack channel or just drop us
-an email to tell us why this is crap (or not?).</p>
-<ul>
-<li><a href="https://groups.google.com/d/forum/apacheexpress">Mailing List</a></li>
-<li><a href="http://slack.noze.io">Slack</a></li>
-<li><a href="../info@apacheexpress.io">info@apacheexpress.io</a></li>
-</ul>
-<h3 id="mkdocs">Mkdocs</h3>
-<p>Built with <a href="http://www.mkdocs.org">MkDocs</a> 
-using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> 
-provided by <a href="https://readthedocs.org">Read the Docs</a>.</p>
-<h3 id="who">Who</h3>
-<p>SwiftXcode is brought to you by the
-<a href="http://zeezide.de">ZeeZide</a> GmbH.
-<a href="http://zeezide.com/contact.html">Imprint</a>.</p>
+                <h1 id="swiftxcode-goals">SwiftXcode Goals</h1>
+<h3 id="1-use-swift-package-manager-directly-from-within-xcode">1. Use Swift Package Manager directly from within Xcode</h3>
+<p>Goal (duration: a few seconds):
+1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)
+2. Build and run. Works.
+You need to add a package? Just edit <code>Package.swift</code> and build.</p>
+<p>State of the art (duration: some minutes or more):
+1. Open terminal.
+2. Call <code>mkdir MyProject</code>. Do a <code>cd MyProject</code>.
+3. Call <code>swift package init</code>, <code>kitura init</code>, or something similar.
+4. Call <code>swift package generate-xcodeproj</code> to create the Xcode project.
+5. Open <code>MyProject.xcodeproj</code>, find and select the right scheme
+6. Build and Run.
+You need to add a package? Start again at step 4, sometimes 3.</p>
+<h3 id="2-reduce-compile-time">2. Reduce Compile Time</h3>
+<p>Calling <code>swift build</code> as a tool is somewhat expensive.</p>
+<p>Goal:
+Instead of doing calling <code>swift build</code> on every build,
+do a <code>swift build</code> only if the <code>Package.swift</code> changes.
+Produces a static library (pretty big, bundles up all the packages),
+which is directly linked against the Xcode target.</p>
+<h3 id="3-reduce-initial-compile-time">3. Reduce <em>Initial</em> Compile Time</h3>
+<p>State of the art:
+When you create a new Swift Package Manager project,
+for instance a Kitura endpoint,
+the initial setup takes a long time:
+1. all the required packages are resolved and fetched from the Internet
+2. all those packages are built from source</p>
+<p>For a plain Kitura HelloWorld this is about 3-5 minutes before you can get
+going, even on a fast machine.</p>
+<p>But worse: This has to be done every single time you create a new project!
+Want to create HelloKitten? Another 3mins lost. HelloCow? Again.</p>
+<p>Goals, alongside goal 1:
+1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)
+2. Edit your main.swift or whatever
+3. Build and run. Only build your own project sources.</p>
+<h4 id="31-bonus-do-not-require-internet-to-create-new-projects">3.1. Bonus: Do not require Internet to create new projects</h4>
+<p>Internet is only required when you install an image, once.
+After that, the bundled image is available and as many projects as desired
+can be created.</p>
               
             </div>
           </div>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../goals/" class="btn btn-neutral" title="Goals"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../images/" class="btn btn-neutral" title="Images"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -177,8 +207,10 @@ provided by <a href="https://readthedocs.org">Read the Docs</a>.</p>
           <a href="https://github.com/SwiftXcode/swift-xcode/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../goals/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../images/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../about/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

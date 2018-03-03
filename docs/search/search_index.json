@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "SwiftXcode Documentation\n\n\nTODO", 
+            "text": "SwiftXcode Documentation\n\n\nUse Swift packages directly from within Xcode,\nw/o having to jump to the Terminal.\nWith swift builds, in a non-annoying way.\nBuild large dependencies once, not for every project.\nDo not require an Internet connection just to create a new project.\n\n\n\n\nInstallation\n\n\nUsing SwiftXcode", 
             "title": "Introduction"
         }, 
         {
             "location": "/#swiftxcode-documentation", 
-            "text": "TODO", 
+            "text": "Use Swift packages directly from within Xcode,\nw/o having to jump to the Terminal.\nWith swift builds, in a non-annoying way.\nBuild large dependencies once, not for every project.\nDo not require an Internet connection just to create a new project.   Installation  Using SwiftXcode", 
             "title": "SwiftXcode Documentation"
         }, 
         {
@@ -37,7 +37,7 @@
         }, 
         {
             "location": "/usage/", 
-            "text": "Usage\n\n\nUsing it for iOS Projects\n\n\nHere is the basic version:\n\n\n\n\nCreate new Project in Xcode (File Menu / New / Project)\n\n\nSelect iOS / Swift Package Manager App\n\n\nGive it a name, optionally preconfigure SPM modules you want\n\n\nBuild project (can take a moment w/o an image)\n\n\nIn Package.swift, add modules as you wish, e.g. \ncows\n\n\nin AppDelegate.swift, \nimport cows\n, do \nprint(cows.vaca())\n\n\nBuild project and run\n\n\n\n\nManual Setup\n\n\nThe functionality can be added to any existing project,\nthere is no requirement to use the templates.\n\n\nSteps:\n- Create a \nPackage.swift\n in your project,\n  DO NOT ADD it to the Xcode target\n- Add an Xcode shell buildstep to your target, put it at the very top.\n  Within that, invoke \nswift xcode build\n\n  (optionally prefixed by an \nSPM_IMAGE=ImageYouWantToUse\n)\n- Add some build settings (either in Xcode or in an xcconfig file):\n  - \"Header Search Paths\" / \nHEADER_SEARCH_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Import Paths\" (Swift) / \nSWIFT_INCLUDE_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Library Search Paths\" / \nLIBRARY_SEARCH_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Other Linker Flags\" / \nOTHER_LDFLAGS\n\n    - \n-lXcodeSPMDependencies\n\n\nIf you do this a lot and you don't want to use the templates,\ncreate an \nxcconfig\n file to carry the settings,\nand just add that to your project.\nWe also provide an xcconfig you can use/include:\n\n/usr/local/lib/xcconfig/swift-xcode.xcconfig\n.", 
+            "text": "Usage\n\n\nUsing it for iOS Projects\n\n\nHere is the basic version:\n\n\n\n\nCreate new Project in Xcode (File Menu / New / Project)\n\n\nSelect iOS / Swift Package Manager App\n\n\nGive it a name, optionally preconfigure SPM modules you want\n\n\nBuild project (can take a moment w/o an image)\n\n\nIn Package.swift, add modules as you wish, e.g. \ncows\n\n\nin AppDelegate.swift, \nimport cows\n, do \nprint(cows.vaca())\n\n\nBuild project and run\n\n\n\n\nUsing it for macOS Projects\n\n\nA macOS command line template is included, but you can also create a Cocoa\napp using the manual setup (to be fixed ...).\n\n\nUsing it for Server Side Swift\n\n\nWe provide a set of images for Kitura etc.\n\n\nManual Setup for any Project\n\n\nThe functionality can be added to any existing project,\nthere is no requirement to use the templates.\n\n\nSteps:\n- Create a \nPackage.swift\n in your project,\n  DO NOT ADD it to the Xcode target\n- Add an Xcode shell buildstep to your target, put it at the very top.\n  Within that, invoke \nswift xcode build\n\n  (optionally prefixed by an \nSPM_IMAGE=ImageYouWantToUse\n)\n- Add some build settings (either in Xcode or in an xcconfig file):\n  - \"Header Search Paths\" / \nHEADER_SEARCH_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Import Paths\" (Swift) / \nSWIFT_INCLUDE_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Library Search Paths\" / \nLIBRARY_SEARCH_PATHS\n\n    - \n$(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION)\n\n  - \"Other Linker Flags\" / \nOTHER_LDFLAGS\n\n    - \n-lXcodeSPMDependencies\n\n\nIf you do this a lot and you don't want to use the templates,\ncreate an \nxcconfig\n file to carry the settings,\nand just add that to your project.\nWe also provide an xcconfig you can use/include:\n\n/usr/local/lib/xcconfig/swift-xcode.xcconfig\n.", 
             "title": "Usage"
         }, 
         {
@@ -51,19 +51,69 @@
             "title": "Using it for iOS Projects"
         }, 
         {
-            "location": "/usage/#manual-setup", 
+            "location": "/usage/#using-it-for-macos-projects", 
+            "text": "A macOS command line template is included, but you can also create a Cocoa\napp using the manual setup (to be fixed ...).", 
+            "title": "Using it for macOS Projects"
+        }, 
+        {
+            "location": "/usage/#using-it-for-server-side-swift", 
+            "text": "We provide a set of images for Kitura etc.", 
+            "title": "Using it for Server Side Swift"
+        }, 
+        {
+            "location": "/usage/#manual-setup-for-any-project", 
             "text": "The functionality can be added to any existing project,\nthere is no requirement to use the templates.  Steps:\n- Create a  Package.swift  in your project,\n  DO NOT ADD it to the Xcode target\n- Add an Xcode shell buildstep to your target, put it at the very top.\n  Within that, invoke  swift xcode build \n  (optionally prefixed by an  SPM_IMAGE=ImageYouWantToUse )\n- Add some build settings (either in Xcode or in an xcconfig file):\n  - \"Header Search Paths\" /  HEADER_SEARCH_PATHS \n    -  $(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION) \n  - \"Import Paths\" (Swift) /  SWIFT_INCLUDE_PATHS \n    -  $(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION) \n  - \"Library Search Paths\" /  LIBRARY_SEARCH_PATHS \n    -  $(SRCROOT)/$(PRODUCT_NAME)/.buildzz/.build/Xcode/$(PLATFORM_PREFERRED_ARCH)-apple-$(SWIFT_PLATFORM_TARGET_PREFIX)$($(DEPLOYMENT_TARGET_SETTING_NAME))/$(CONFIGURATION) \n  - \"Other Linker Flags\" /  OTHER_LDFLAGS \n    -  -lXcodeSPMDependencies  If you do this a lot and you don't want to use the templates,\ncreate an  xcconfig  file to carry the settings,\nand just add that to your project.\nWe also provide an xcconfig you can use/include: /usr/local/lib/xcconfig/swift-xcode.xcconfig .", 
-            "title": "Manual Setup"
+            "title": "Manual Setup for any Project"
         }, 
         {
             "location": "/images/", 
-            "text": "img", 
+            "text": "SwiftXcode Images\n\n\nImages are pairs of Xcode templates and precompiled Swift packages \n(used by those templates).\nThe precompilation happens when you install a Homebrew image formula\n(or manually using the GIT repo) and can take some time.\nAfterwards you can create new Xcode projects using those templates,\nwithout having to wait for the SPM bootstrap (fetch and compilation\nof the dependencies).\n\n\nImportant:\n After installing (or uninstalling) an image, make sure to call:\n\n\nswift xcode link-templates # \n-- important!\n\n\n\n\nThis makes the image's Xcode templates available to Xcode.\n\n\nNew Xcode Releases\n\n\nIf a new Xcode is released (/a new Swift version),\nmake sure to rebuild your images \n(e.g. using \nbrew reinstall swift-xcode-kitura\n).\n\n\nEverything will work w/o this, but you loose the convenience of having\nprecompiled packages at setup time.\n\n\nCreating New Images\n\n\nTODO", 
             "title": "Images"
         }, 
         {
-            "location": "/images/#img", 
+            "location": "/images/#swiftxcode-images", 
+            "text": "Images are pairs of Xcode templates and precompiled Swift packages \n(used by those templates).\nThe precompilation happens when you install a Homebrew image formula\n(or manually using the GIT repo) and can take some time.\nAfterwards you can create new Xcode projects using those templates,\nwithout having to wait for the SPM bootstrap (fetch and compilation\nof the dependencies).  Important:  After installing (or uninstalling) an image, make sure to call:  swift xcode link-templates #  -- important!  This makes the image's Xcode templates available to Xcode.", 
+            "title": "SwiftXcode Images"
+        }, 
+        {
+            "location": "/images/#new-xcode-releases", 
+            "text": "If a new Xcode is released (/a new Swift version),\nmake sure to rebuild your images \n(e.g. using  brew reinstall swift-xcode-kitura ).  Everything will work w/o this, but you loose the convenience of having\nprecompiled packages at setup time.", 
+            "title": "New Xcode Releases"
+        }, 
+        {
+            "location": "/images/#creating-new-images", 
+            "text": "TODO", 
+            "title": "Creating New Images"
+        }, 
+        {
+            "location": "/goals/", 
+            "text": "SwiftXcode Goals\n\n\n1. Use Swift Package Manager directly from within Xcode\n\n\nGoal (duration: a few seconds):\n1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)\n2. Build and run. Works.\nYou need to add a package? Just edit \nPackage.swift\n and build.\n\n\nState of the art (duration: some minutes or more):\n1. Open terminal.\n2. Call \nmkdir MyProject\n. Do a \ncd MyProject\n.\n3. Call \nswift package init\n, \nkitura init\n, or something similar.\n4. Call \nswift package generate-xcodeproj\n to create the Xcode project.\n5. Open \nMyProject.xcodeproj\n, find and select the right scheme\n6. Build and Run.\nYou need to add a package? Start again at step 4, sometimes 3.\n\n\n2. Reduce Compile Time\n\n\nCalling \nswift build\n as a tool is somewhat expensive.\n\n\nGoal:\nInstead of doing calling \nswift build\n on every build,\ndo a \nswift build\n only if the \nPackage.swift\n changes.\nProduces a static library (pretty big, bundles up all the packages),\nwhich is directly linked against the Xcode target.\n\n\n3. Reduce \nInitial\n Compile Time\n\n\nState of the art:\nWhen you create a new Swift Package Manager project,\nfor instance a Kitura endpoint,\nthe initial setup takes a long time:\n1. all the required packages are resolved and fetched from the Internet\n2. all those packages are built from source\n\n\nFor a plain Kitura HelloWorld this is about 3-5 minutes before you can get\ngoing, even on a fast machine.\n\n\nBut worse: This has to be done every single time you create a new project!\nWant to create HelloKitten? Another 3mins lost. HelloCow? Again.\n\n\nGoals, alongside goal 1:\n1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)\n2. Edit your main.swift or whatever\n3. Build and run. Only build your own project sources.\n\n\n3.1. Bonus: Do not require Internet to create new projects\n\n\nInternet is only required when you install an image, once.\nAfter that, the bundled image is available and as many projects as desired\ncan be created.", 
+            "title": "Goals"
+        }, 
+        {
+            "location": "/goals/#swiftxcode-goals", 
             "text": "", 
-            "title": "img"
+            "title": "SwiftXcode Goals"
+        }, 
+        {
+            "location": "/goals/#1-use-swift-package-manager-directly-from-within-xcode", 
+            "text": "Goal (duration: a few seconds):\n1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)\n2. Build and run. Works.\nYou need to add a package? Just edit  Package.swift  and build.  State of the art (duration: some minutes or more):\n1. Open terminal.\n2. Call  mkdir MyProject . Do a  cd MyProject .\n3. Call  swift package init ,  kitura init , or something similar.\n4. Call  swift package generate-xcodeproj  to create the Xcode project.\n5. Open  MyProject.xcodeproj , find and select the right scheme\n6. Build and Run.\nYou need to add a package? Start again at step 4, sometimes 3.", 
+            "title": "1. Use Swift Package Manager directly from within Xcode"
+        }, 
+        {
+            "location": "/goals/#2-reduce-compile-time", 
+            "text": "Calling  swift build  as a tool is somewhat expensive.  Goal:\nInstead of doing calling  swift build  on every build,\ndo a  swift build  only if the  Package.swift  changes.\nProduces a static library (pretty big, bundles up all the packages),\nwhich is directly linked against the Xcode target.", 
+            "title": "2. Reduce Compile Time"
+        }, 
+        {
+            "location": "/goals/#3-reduce-initial-compile-time", 
+            "text": "State of the art:\nWhen you create a new Swift Package Manager project,\nfor instance a Kitura endpoint,\nthe initial setup takes a long time:\n1. all the required packages are resolved and fetched from the Internet\n2. all those packages are built from source  For a plain Kitura HelloWorld this is about 3-5 minutes before you can get\ngoing, even on a fast machine.  But worse: This has to be done every single time you create a new project!\nWant to create HelloKitten? Another 3mins lost. HelloCow? Again.  Goals, alongside goal 1:\n1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)\n2. Edit your main.swift or whatever\n3. Build and run. Only build your own project sources.", 
+            "title": "3. Reduce Initial Compile Time"
+        }, 
+        {
+            "location": "/goals/#31-bonus-do-not-require-internet-to-create-new-projects", 
+            "text": "Internet is only required when you install an image, once.\nAfter that, the bundled image is available and as many projects as desired\ncan be created.", 
+            "title": "3.1. Bonus: Do not require Internet to create new projects"
         }, 
         {
             "location": "/about/", 
