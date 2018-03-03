@@ -141,18 +141,22 @@
               
                 <h1 id="swiftxcode-goals">SwiftXcode Goals</h1>
 <h3 id="1-use-swift-package-manager-directly-from-within-xcode">1. Use Swift Package Manager directly from within Xcode</h3>
-<p>Goal (duration: a few seconds):
-1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)
-2. Build and run. Works.
-You need to add a package? Just edit <code>Package.swift</code> and build.</p>
-<p>State of the art (duration: some minutes or more):
-1. Open terminal.
-2. Call <code>mkdir MyProject</code>. Do a <code>cd MyProject</code>.
-3. Call <code>swift package init</code>, <code>kitura init</code>, or something similar.
-4. Call <code>swift package generate-xcodeproj</code> to create the Xcode project.
-5. Open <code>MyProject.xcodeproj</code>, find and select the right scheme
-6. Build and Run.
-You need to add a package? Start again at step 4, sometimes 3.</p>
+<p>Goal (duration: a few seconds):</p>
+<ol>
+<li>Create a project from within Xcode. (Cmd-Shift-N, follow wizard)</li>
+<li>Build and run. Works.</li>
+</ol>
+<p>You need to add a package? Just edit <code>Package.swift</code> and build.</p>
+<p>State of the art (duration: some minutes or more):</p>
+<ol>
+<li>Open terminal.</li>
+<li>Call <code>mkdir MyProject</code>. Do a <code>cd MyProject</code>.</li>
+<li>Call <code>swift package init</code>, <code>kitura init</code>, or something similar.</li>
+<li>Call <code>swift package generate-xcodeproj</code> to create the Xcode project.</li>
+<li>Open <code>MyProject.xcodeproj</code>, find and select the right scheme</li>
+<li>Build and Run.</li>
+</ol>
+<p>You need to add a package? Start again at step 4, sometimes 3.</p>
 <h3 id="2-reduce-compile-time">2. Reduce Compile Time</h3>
 <p>Calling <code>swift build</code> as a tool is somewhat expensive.</p>
 <p>Goal:
@@ -164,17 +168,21 @@ which is directly linked against the Xcode target.</p>
 <p>State of the art:
 When you create a new Swift Package Manager project,
 for instance a Kitura endpoint,
-the initial setup takes a long time:
-1. all the required packages are resolved and fetched from the Internet
-2. all those packages are built from source</p>
+the initial setup takes a long time:</p>
+<ol>
+<li>all the required packages are resolved and fetched from the Internet</li>
+<li>all those packages are built from source</li>
+</ol>
 <p>For a plain Kitura HelloWorld this is about 3-5 minutes before you can get
 going, even on a fast machine.</p>
 <p>But worse: This has to be done every single time you create a new project!
 Want to create HelloKitten? Another 3mins lost. HelloCow? Again.</p>
-<p>Goals, alongside goal 1:
-1. Create a project from within Xcode. (Cmd-Shift-N, follow wizard)
-2. Edit your main.swift or whatever
-3. Build and run. Only build your own project sources.</p>
+<p>Goals, alongside goal 1:</p>
+<ol>
+<li>Create a project from within Xcode. (Cmd-Shift-N, follow wizard)</li>
+<li>Edit your main.swift or whatever</li>
+<li>Build and run. Only build your own project sources.</li>
+</ol>
 <h4 id="31-bonus-do-not-require-internet-to-create-new-projects">3.1. Bonus: Do not require Internet to create new projects</h4>
 <p>Internet is only required when you install an image, once.
 After that, the bundled image is available and as many projects as desired
