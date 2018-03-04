@@ -1,11 +1,11 @@
-<h2>Documentation for PL/Swift
-  <img src="http://zeezide.com/img/plswift.svg"
+<h2>Documentation for SwiftXcode
+  <img src="http://zeezide.com/img/SwiftXcodePkgIcon.svg"
        align="right" width="128" height="128" />
 </h2>
 
-This is the source repository for the PL/Swift documentation.
+This is the source repository for the SwiftXcode documentation.
 Checkout the built results over here:
-[https://pl-swift.github.io/docs/](https://pl-swift.github.io/docs/).
+[https://SwiftXcode.github.io/docs/](https://SwiftXcode.github.io/docs/).
 
 #### mkdocs setup
 
