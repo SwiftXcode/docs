@@ -3,7 +3,6 @@ site_url:         https://SwiftXcode.github.io/
 site_author:      ZeeZide GmbH
 copyright:        © ZeeZide GmbH 2018
 repo_url:         https://github.com/SwiftXcode/swift-xcode
-google_analytics: [ 'UA-3266252-11', 'mod-swift.org' ]
   
 docs_dir:    content
 site_dir:    docs
